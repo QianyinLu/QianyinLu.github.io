@@ -7,4 +7,4 @@ Slug: My-first-post
 Authors: Presnie Lu
 Summary: First post
 
-This is the *first post* from my Pelican blog. **YAY!**
+This is the blog for describing how did I generate this new static page.
