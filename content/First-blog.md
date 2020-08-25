@@ -5,7 +5,7 @@ Modified: 2020-08-24 12:30
 Tags: Static, Pelican
 Slug: static-page
 Authors: Presnie Lu
-Summary: Personal website
+Summary: Static Site With Pelican
 
 
 **This first blog will be used to describe how to generate a static page using pelican and upload it to github.**
