@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Presnie Lu - Algorithms</title><link href="/" rel="alternate"></link><link href="/feeds/algorithms.atom.xml" rel="self"></link><id>/</id><updated>2020-08-25T12:30:00-04:00</updated><subtitle>A Data Science Portfolio</subtitle><entry><title>Problem Solving of the Euler Project</title><link href="/euler-project-problem.html" rel="alternate"></link><published>2020-08-25T10:01:00-04:00</published><updated>2020-08-25T12:30:00-04:00</updated><author><name>Presnie Lu</name></author><id>tag:None,2020-08-25:/euler-project-problem.html</id><summary type="html">&lt;p&gt;Solve 3 problems of the Euler Project&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Problem 1&lt;/h2&gt;
+&lt;h2&gt;Problem 2&lt;/h2&gt;
+&lt;h2&gt;Problem 3&lt;/h2&gt;</content><category term="Algorithms"></category><category term="Euler Project"></category><category term="data structure"></category></entry></feed>
