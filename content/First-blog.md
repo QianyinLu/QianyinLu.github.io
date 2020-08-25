@@ -8,7 +8,7 @@ Authors: Presnie Lu
 Summary: Static Site With Pelican
 
 
-**This first blog will be used to describe how to generate a static page using pelican and upload it to github.**
+**This first blog will describe how to generate a static page using pelican and upload it to github.**
 
 ## Build a New Repository
 The first step is to create a new repository in github. I simply renamed the new repository using my own user name. I followed the instructions provided by [GitHub](https://pages.github.com/) and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. 
