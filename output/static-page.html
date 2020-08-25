@@ -7,17 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>How to Create a Static Page on Github</title>
+  <title>How to Create a Static Site on Github</title>
 
 
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="origin" />
   <meta name="generator" content="Pelican" />
-<link href="/My-first-post.html" rel="canonical" />
+<link href="/static-page.html" rel="canonical" />
   <!-- Feed -->
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie's blog Full Atom Feed" />
-          <link href="/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie's blog Categories Atom Feed" />
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -38,7 +36,7 @@
 
 
 
-    <meta name="description" content="First post">
+    <meta name="description" content="Static page on Github">
 
     <meta name="author" content="Presnie Lu">
 
@@ -49,16 +47,16 @@
 
 
 <!-- Open Graph -->
-<meta property="og:site_name" content="Presnie's blog"/>
-<meta property="og:title" content="How to Create a Static Page on Github"/>
-<meta property="og:description" content="First post"/>
+<meta property="og:site_name" content="Presnie Lu"/>
+<meta property="og:title" content="How to Create a Static Site on Github"/>
+<meta property="og:description" content="Static page on Github"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/My-first-post.html"/>
+<meta property="og:url" content="/static-page.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2020-08-24 10:01:00-04:00"/>
 <meta property="article:modified_time" content="2020-08-24 12:30:00-04:00"/>
 <meta property="article:author" content="/author/presnie-lu.html">
-<meta property="article:section" content="misc"/>
+<meta property="article:section" content="Pelican"/>
 <meta property="article:tag" content="Static"/>
 <meta property="article:tag" content="Pelican"/>
 <meta property="og:image" content="/theme/images/post-bg.jpg">
@@ -69,8 +67,8 @@
 {
   "@context": "http://schema.org",
   "@type": "Article",
-  "name": "How to Create a Static Page on Github",
-  "headline": "How to Create a Static Page on Github",
+  "name": "How to Create a Static Site on Github",
+  "headline": "How to Create a Static Site on Github",
   "datePublished": "2020-08-24 10:01:00-04:00",
   "dateModified": "2020-08-24 12:30:00-04:00",
   "author": {
@@ -79,8 +77,8 @@
     "url": "/author/presnie-lu.html"
   },
   "image": "/theme/images/post-bg.jpg",
-  "url": "/My-first-post.html",
-  "description": "First post"
+  "url": "/static-page.html",
+  "description": "Static page on Github"
 }
 </script>
 </head>
@@ -93,7 +91,7 @@
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/My-first-post.html">Intro</a></li>
+              <li role="presentation"><a href="/pages/Intro.html">Introduction of the Author</a></li>
 
     </ul>
   </div>
@@ -115,7 +113,7 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">How to Create a Static Page on Github</h1>
+        <h1 class="post-title">How to Create a Static Site on Github</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="/author/presnie-lu.html">Presnie Lu</a>
@@ -135,62 +133,48 @@
         <div class="inner">
             <section class="post-content">
                 <p><strong>This first blog will be used to describe how to generate a static page using pelican and upload it to github.</strong></p>
-<h2>Generate a static page using pelican</h2>
-<p>The first step is to create a new repository in github. I simply renamed the new repository using my own user name. </p>
-<h2>Tables, blockquotes and codeblocks</h2>
-<p>Apple pie chocolate cake jelly-o icing bonbon. Gingerbread pastry fruitcake
-muffin chocolate bar cheesecake. Sugar plum bonbon bonbon lemon drops gummies.</p>
-<table>
-<thead>
-<tr>
-<th>RGB</th>
-<th>CMYK</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Red</td>
-<td>Cyan</td>
-</tr>
-<tr>
-<td>Green</td>
-<td>Magenta</td>
-</tr>
-<tr>
-<td>Blue</td>
-<td>Yellow</td>
-</tr>
-</tbody>
-</table>
-<h2>Quote</h2>
-<blockquote>
-<p>Jelly beans dessert toffee caramels brownie ice cream croissant chupa chups
-liquorice. Danish sweet roll croissant. Powder sugar plum powder danish wafer
-cake.</p>
-</blockquote>
-<h2>List</h2>
+<h2>Build a New Repository</h2>
+<p>The first step is to create a new repository in github. I simply renamed the new repository using my own user name. I followed the instructions provided by <a href="https://pages.github.com/">GitHub</a> and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. </p>
+<h2>Create a Static Site with Pelican</h2>
+<p>The next step is to use the static site generater <a href="https://blog.getpelican.com/">Pelican</a> to create my own personal website. I listed several steps used to achieve such goal:  </p>
 <ol>
-<li>Drops marzipan icing. Dessert topping croissant fruitcake sesame snaps cotton candy sweet danish </li>
+<li>Install the pelican and ghp-import packages: the ghp-import package is used to publish the website to github.<br>
+<code>pip install pelican ghp-import</code>  </li>
 <li>
-<p>Sweet roll sweet sugar plum donut   </p>
+<p>Run pelican-quickstart to create the site: Most questions can follow the default setting or our own preferences. Note: The following two questions are answered with Y to enable the automation process.  </p>
 <ul>
-<li>Bear claw gingerbread cake donut chocolate bar</li>
-<li>Topping cake fruitcake fruitcake</li>
-<li>Ice cream icing chupa chups cupcake jelly-o candy</li>
+<li>Do you want to generate a Fabfile/Makefile to automate generation and publishing? Y  </li>
+<li>Do you want to upload your website using GitHub Pages? Y  </li>
 </ul>
 </li>
+<li>
+<p>Create blogs/Articles under the content folder with text editor.(I used Markdown)  </p>
+</li>
+<li>
+<p>Generate the static files and Start the server using command: <br>
+<code>make html &amp;&amp; make serve</code>  </p>
+</li>
+<li>
+<p>Preview the website by typing localhost:8000 in web browser's address bar.  </p>
+</li>
 </ol>
+<h2>Update the Website to Github</h2>
+<p>The left step is to send the entire code to Github. We add, commit and push everying to the github. We will also generate the final output of the pages under master branch on github using the make function. </p>
+<p><code>make github</code>  </p>
+<h2>Optional: Change the Theme</h2>
+<p>There are many <a href="http://www.pelicanthemes.com/">themes</a> available for pelican users. Once we decided which one to use, we can then navigate to the <a href="https://github.com/getpelican/pelican-themes">Pelican Themes GitHub repository</a>. Following the instruction from the README file, I first clone the repository to local machine and then add the following line to pelicanconf file from my website's folder. I used the <a href="https://github.com/arulrajnet/attila/tree/02dcad911ba1eb2d797a79ec008a810d89a2fde1">attila</a> theme and many customized setting can be done similarly by modifying folders or the pelicanconf file.  </p>
+<p><code>THEME = Location of the Selected Theme Folder</code></p>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=How to Create a Static Page on Github&amp;url=/My-first-post.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=How to Create a Static Site on Github&amp;url=/static-page.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/My-first-post.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/static-page.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=/My-first-post.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/static-page.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
