@@ -5,10 +5,9 @@ Modified: 2020-08-25 12:30
 Tags: Euler Project, data structure
 Slug: euler-project-problem
 Authors: Presnie Lu
-Summary: Solve 3 problems of the Euler Project
+Summary: Solve three problems of the Euler Project
 
 ## Problem 1
-
 
 ## Problem 2
 
