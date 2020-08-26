@@ -1,4 +1,4 @@
-Title: Solution Explanation to the Euler Project
+Title: Solution Explanations to the Euler Project
 Category: Algorithms
 Date: 2020-08-25 10:01
 Modified: 2020-08-25 12:30
