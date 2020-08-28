@@ -1,4 +1,4 @@
-Title: How to Create a Static Site on Github
+Title: How to Create a Static Site on GitHub
 Category: Pelican
 Date: 2020-08-24 10:01
 Modified: 2020-08-24 12:30
@@ -8,10 +8,10 @@ Authors: Presnie Lu
 Summary: Static Site with Pelican
 
 
-**This first blog will describe how to generate a static page using pelican and upload it to github.**
+**This first blog will describe how to generate a static page using pelican and upload it to GitHub.**
 
 ## Build a New Repository
-The first step is to create a new repository in github. I simply renamed the new repository using my own user name. I followed the instructions provided by [GitHub](https://pages.github.com/) and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. 
+The first step is to create a new repository on GitHub. I simply renamed the new repository using my own user name. I followed the instructions provided by [GitHub](https://pages.github.com/) and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. 
 
 ## Create a Static Site with Pelican
 The next step is to use the static site generater [Pelican](https://blog.getpelican.com/) to create my own personal website. I listed several steps used to achieve such goal:  
@@ -29,8 +29,8 @@ The next step is to use the static site generater [Pelican](https://blog.getpeli
   
 5. Preview the website by typing localhost:8000 in web browser's address bar.  
 
-## Update the Website to Github
-The left step is to send the entire code to Github. We add, commit and push everying to the github. We will also generate the final output of the pages under master branch on github using the make function. 
+## Update the Website to GitHub
+The left step is to send the entire code to GitHub. We add, commit and push everying to the GitHub. We will also generate the final output of the pages under master branch on GitHub using the make function. 
   
 ``` make github ```  
 
