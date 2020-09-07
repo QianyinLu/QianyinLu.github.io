@@ -8,6 +8,8 @@ Authors: Presnie Lu
 Summary: Solve three problems of the Euler Project
 
 ## Problem 1
+code:
+explanation:
 
 ## Problem 2
 
