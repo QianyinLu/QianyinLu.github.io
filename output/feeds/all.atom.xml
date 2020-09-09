@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Presnie Lu</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-09-09T11:30:00-04:00</updated><subtitle>A Data Science Portfolio</subtitle><entry><title>Solution Explanations to the Euler Project</title><link href="/euler-project-problem.html" rel="alternate"></link><published>2020-08-25T10:01:00-04:00</published><updated>2020-09-09T11:30:00-04:00</updated><author><name>Presnie Lu</name></author><id>tag:None,2020-08-25:/euler-project-problem.html</id><summary type="html">&lt;p&gt;Solve three problems of the Euler Project&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;This blog is used to illustrate how to solve three problems from Project Euler. Eeach problem will have the solution code attached as well as an explanation to that step by step.&lt;/strong&gt;&lt;/p&gt;
-&lt;h2&gt;Problem 1 - Largest product in a series&lt;/h2&gt;
+&lt;h1&gt;Problem 1 - Largest product in a series&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://projecteuler.net/problem=8"&gt;Problem 8&lt;/a&gt; From Project Euler.&lt;/strong&gt;   &lt;/p&gt;
 &lt;p&gt;To solve the problem, the following steps were considered:&lt;br&gt;
 1. Copy the string that includes the 1000-digit number to python. The major modification I did for the string was to remove the line switch so that the string will only include integers.&lt;br&gt;
@@ -8,7 +8,7 @@
 3. Regroup these integers into the required numbers of adjacent digits, in this case, each sublist in combo includes 13 adjacent digits.&lt;br&gt;
 4. Generate a list called products to include products of each combination of 13 adjacent digits.&lt;br&gt;
 5. Find the largest number and its index in the product list and extract what combination leads to such outcome by using the same index. &lt;/p&gt;
-&lt;h4&gt;code:&lt;/h4&gt;
+&lt;h4&gt;Code:&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;consecutive_num&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;integer_set&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -21,8 +21,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Using this function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895&lt;/p&gt;
-&lt;h2&gt;Problem 2&lt;/h2&gt;
+&lt;p&gt;Using this function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895.&lt;/p&gt;
+&lt;h1&gt;Problem 2 - Pandigital multiples&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://projecteuler.net/problem=38"&gt;Problem 38&lt;/a&gt; From Project Euler.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;In this problem, pandigital depends on two variables: integer and the largest multiple. In order to find the biggest 1-9 pandigital 9-digit number, one possible method is to do grid search, which is to calculate the concatenated product, for each possible integer and multiples combination. However, such method will include too many computations and such process can be optimized by narrowing down the range of the grid search. According to the requirement of the question, we can do the following:  &lt;/p&gt;
 &lt;ol&gt;
@@ -32,7 +32,7 @@
 &lt;/ol&gt;
 &lt;p&gt;Therefore, I did the grid search for integers with first digit as 9, ranging from 9 to 9999 and multiples from 2 to 5.&lt;br&gt;
 Notice that to check whether the pandigital number is a 1-9 number, I will sorted digits of this number and check whether it equals exactly to '123456789' to avoid any repetitions or 0s.   &lt;/p&gt;
-&lt;h4&gt;code:&lt;/h4&gt;
+&lt;h4&gt;Code:&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_max_pandigital&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min_int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;pan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min_int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -48,7 +48,27 @@ Notice that to check whether the pandigital number is a 1-9 number, I will sorte
 
 
 &lt;p&gt;Using this function, the Largest 1 to 9 pandigital 9-digit number is 932718654.&lt;/p&gt;
-&lt;h2&gt;Problem 3&lt;/h2&gt;</content><category term="Algorithms"></category><category term="Euler Project"></category><category term="data structure"></category></entry><entry><title>How to Create a Static Site on GitHub</title><link href="/static-page.html" rel="alternate"></link><published>2020-08-24T10:01:00-04:00</published><updated>2020-08-24T12:30:00-04:00</updated><author><name>Presnie Lu</name></author><id>tag:None,2020-08-24:/static-page.html</id><summary type="html">&lt;p&gt;Static Site with Pelican&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;This first blog will describe how to generate a static page using pelican and upload it to GitHub.&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;Problem 3 - Bouncy numbers&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://projecteuler.net/problem=112"&gt;Problem 112&lt;/a&gt; From Project Euler.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A bouncy number is a positive integer that is neither increasing nor decreasing. Thus, I used a similar methodology as the last question to determine whether the number is bouncy or not. If a number equals to the sorted version (either ascending or descending order) of itself, then this number is either increasing or decreasing, and thus it is not a bouncy number. Following by that, I used a while loop to loop over integers starting from 1. Within each loop, the integer will be checked to see if it is a bouncy number; If it is a bouncy number, I will add 1 to the count of bouncy numbers. By keeping a record of number of bouncy numbers for each loop, we can easily get the percentage of bouncy numbers for each integer. The loop will then stop when the percentage of bouncy number reaches 99% exactly. Since the loop is generated by an ascending order of integers, the while loop will stop at the smallest number that satisfies the condition of 99% bouncy number.&lt;/p&gt;
+&lt;h4&gt;Code:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bouncy_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pct&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;bouncy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="n"&gt;percent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;percent&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;pct&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+            &lt;span class="n"&gt;bouncy&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; 
+        &lt;span class="n"&gt;percent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bouncy&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;
+
+&lt;span class="n"&gt;bouncy_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.99&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Using the function, the least number for which the proportion of bouncy numbers is exactly 99% is 1587000.&lt;/p&gt;</content><category term="Algorithms"></category><category term="Euler Project"></category><category term="data structure"></category></entry><entry><title>How to Create a Static Site on GitHub</title><link href="/static-page.html" rel="alternate"></link><published>2020-08-24T10:01:00-04:00</published><updated>2020-08-24T12:30:00-04:00</updated><author><name>Presnie Lu</name></author><id>tag:None,2020-08-24:/static-page.html</id><summary type="html">&lt;p&gt;Static Site with Pelican&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;This first blog will describe how to generate a static page using pelican and upload it to GitHub.&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Build a New Repository&lt;/h2&gt;
 &lt;p&gt;The first step is to create a new repository on GitHub. I simply renamed the new repository using my own user name. I followed the instructions provided by &lt;a href="https://pages.github.com/"&gt;GitHub&lt;/a&gt; and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. &lt;/p&gt;
 &lt;h2&gt;Create a Static Site with Pelican&lt;/h2&gt;
