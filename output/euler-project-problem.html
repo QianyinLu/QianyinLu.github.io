@@ -16,8 +16,6 @@
   <meta name="generator" content="Pelican" />
 <link href="/euler-project-problem.html" rel="canonical" />
   <!-- Feed -->
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Full Atom Feed" />
-          <link href="/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Categories Atom Feed" />
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -136,8 +134,13 @@
             <section class="post-content">
                 <p><strong>This blog is used to illustrate how to solve three problems from Project Euler. Eeach problem will have the solution code attached as well as an explanation to that step by step.</strong></p>
 <h2>Problem 1 - Largest product in a series</h2>
-<p><strong>from Project Euler's <a href="https://projecteuler.net/problem=8">Problem 8</a>.</strong>   </p>
-<p>To solve this problem, I first copied the string that includes the 1000-digit number to python. The major modification I did for the string was to remove the line switch so that the string will only include integers. Then, I used list comprehension to convert all numbers from string to integers and splitted each integer by ",". The next step is to regroup these integers into the required numbers of adjacent digits, in this case, each sublist in combo includes 13 adjacent digits.  After that, I generated a list called products to include products of each combination of 13 adjacent digits. Then, it is easy to find the largest number and its index in the product list and find what combination leads to such outcome by using the same index. </p>
+<p><strong><a href="https://projecteuler.net/problem=8">Problem 8</a> From Project Euler.</strong>   </p>
+<p>To solve the problem, the following steps were considered:<br>
+1. Copy the string that includes the 1000-digit number to python. The major modification I did for the string was to remove the line switch so that the string will only include integers.<br>
+2. Use list comprehension to convert all numbers from string to integers and splitted each integer by ",".<br>
+3. Regroup these integers into the required numbers of adjacent digits, in this case, each sublist in combo includes 13 adjacent digits.<br>
+4. Generate a list called products to include products of each combination of 13 adjacent digits.<br>
+5. Find the largest number and its index in the product list and extract what combination leads to such outcome by using the same index. </p>
 <h4>code:</h4>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">consecutive_num</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">number</span><span class="o">=</span><span class="n">raw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -151,8 +154,33 @@
 </pre></div>
 
 
-<p>Using such function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895</p>
+<p>Using this function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895</p>
 <h2>Problem 2</h2>
+<p><strong><a href="https://projecteuler.net/problem=38">Problem 38</a> From Project Euler.</strong> </p>
+<p>In this problem, pandigital depends on two variables: integer and the largest multiple. In order to find the biggest 1-9 pandigital 9-digit number, one possible method is to do grid search, which is to calculate the concatenated product, for each possible integer and multiples combination. However, such method will include too many computations and such process can be optimized by narrowing down the range of the grid search. According to the requirement of the question, we can do the following:  </p>
+<ol>
+<li>To find the largest value of the pandigital number, the first digit of the pandigital number and integer should both be 9 because it is the concatenated products of that integer.  </li>
+<li>To restrict the number of digits to 9, the integer should have at most 4 digits because the multiple n has to be bigger than 1; if the integer is 5-digit, the pandigital number will have at least 10 digits.   </li>
+<li>Combing the above two evidence, the smallest integer we should try is 9. According to the example given in the question, the concatenated product of 9 and (1,2,3,4,5) is already 9-digit, thus, the largest multiple to try should be 5.   </li>
+</ol>
+<p>Therefore, I did the grid search for integers with first digit as 9, ranging from 9 to 9999 and multiples from 2 to 5.<br>
+Notice that to check whether the pandigital number is a 1-9 number, I will sorted digits of this number and check whether it equals exactly to '123456789' to avoid any repetitions or 0s.   </p>
+<h4>code:</h4>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_max_pandigital</span><span class="p">(</span><span class="n">min_int</span><span class="p">,</span> <span class="n">max_int</span><span class="p">,</span> <span class="n">max_n</span><span class="p">):</span>
+    <span class="n">pan</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_int</span><span class="p">,</span> <span class="n">max_int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;9&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">max_n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">product</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">product</span><span class="p">))</span> <span class="o">==</span> <span class="s1">&#39;123456789&#39;</span><span class="p">:</span>
+                    <span class="n">pan</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pan</span><span class="p">])</span>
+
+<span class="n">find_max_pandigital</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">9999</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Using this function, the Largest 1 to 9 pandigital 9-digit number is 932718654.</p>
 <h2>Problem 3</h2>
             </section>
 

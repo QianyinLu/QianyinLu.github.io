@@ -10,9 +10,14 @@ Summary: Solve three problems of the Euler Project
 **This blog is used to illustrate how to solve three problems from Project Euler. Eeach problem will have the solution code attached as well as an explanation to that step by step.**
 
 ## Problem 1 - Largest product in a series
-**from Project Euler's [Problem 8](https://projecteuler.net/problem=8).**   
+**[Problem 8](https://projecteuler.net/problem=8) From Project Euler.**   
   
-To solve this problem, I first copied the string that includes the 1000-digit number to python. The major modification I did for the string was to remove the line switch so that the string will only include integers. Then, I used list comprehension to convert all numbers from string to integers and splitted each integer by ",". The next step is to regroup these integers into the required numbers of adjacent digits, in this case, each sublist in combo includes 13 adjacent digits.  After that, I generated a list called products to include products of each combination of 13 adjacent digits. Then, it is easy to find the largest number and its index in the product list and find what combination leads to such outcome by using the same index. 
+To solve the problem, the following steps were considered:  
+1. Copy the string that includes the 1000-digit number to python. The major modification I did for the string was to remove the line switch so that the string will only include integers.  
+2. Use list comprehension to convert all numbers from string to integers and splitted each integer by ",".  
+3. Regroup these integers into the required numbers of adjacent digits, in this case, each sublist in combo includes 13 adjacent digits.  
+4. Generate a list called products to include products of each combination of 13 adjacent digits.  
+5. Find the largest number and its index in the product list and extract what combination leads to such outcome by using the same index. 
 
 #### code:  
 
@@ -27,8 +32,37 @@ To solve this problem, I first copied the string that includes the 1000-digit nu
     
     consecutive_num(raw,13)
 
-Using such function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895
+Using this function, the largest product is 23514624000 and the 13 adjacent digits should be 5576689664895
 
 ## Problem 2
+**[Problem 38](https://projecteuler.net/problem=38) From Project Euler.** 
+
+In this problem, pandigital depends on two variables: integer and the largest multiple. In order to find the biggest 1-9 pandigital 9-digit number, one possible method is to do grid search, which is to calculate the concatenated product, for each possible integer and multiples combination. However, such method will include too many computations and such process can be optimized by narrowing down the range of the grid search. According to the requirement of the question, we can do the following:  
+  
+1. To find the largest value of the pandigital number, the first digit of the pandigital number and integer should both be 9 because it is the concatenated products of that integer.  
+2. To restrict the number of digits to 9, the integer should have at most 4 digits because the multiple n has to be bigger than 1; if the integer is 5-digit, the pandigital number will have at least 10 digits.   
+3. Combing the above two evidence, the smallest integer we should try is 9. According to the example given in the question, the concatenated product of 9 and (1,2,3,4,5) is already 9-digit, thus, the largest multiple to try should be 5.   
+
+Therefore, I did the grid search for integers with first digit as 9, ranging from 9 to 9999 and multiples from 2 to 5.  
+Notice that to check whether the pandigital number is a 1-9 number, I will sorted digits of this number and check whether it equals exactly to '123456789' to avoid any repetitions or 0s.   
+
+#### code: 
+
+    :::python
+    def find_max_pandigital(min_int, max_int, max_n):
+        pan = []
+        for number in range(min_int, max_int):
+            if str(number).startswith('9'):
+                for n in range(2,max_n+1):
+                    product = "".join(str(number*i) for i in range(1,n+1))
+                    if "".join(sorted(product)) == '123456789':
+                        pan.append(product)
+        return np.max([int(i) for i in pan])
+        
+    find_max_pandigital(9,9999,5)
+
+Using this function, the Largest 1 to 9 pandigital 9-digit number is 932718654.
 
 ## Problem 3
+
+
