@@ -7,14 +7,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>How to Create a Static Site on GitHub</title>
+  <title>Project Malaria Plot</title>
 
 
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="origin" />
   <meta name="generator" content="Pelican" />
-<link href="/static-page.html" rel="canonical" />
+<link href="/plot.html" rel="canonical" />
   <!-- Feed -->
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
@@ -36,29 +36,29 @@
 
 
 
-    <meta name="description" content="Static Site with Pelican">
+    <meta name="description" content="Plot in python">
 
     <meta name="author" content="Presnie Lu">
 
-    <meta name="tags" content="Static">
-    <meta name="tags" content="Pelican">
+    <meta name="tags" content="plot">
+    <meta name="tags" content="python">
 
 
 
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="Presnie Lu"/>
-<meta property="og:title" content="How to Create a Static Site on GitHub"/>
-<meta property="og:description" content="Static Site with Pelican"/>
+<meta property="og:title" content="Project Malaria Plot"/>
+<meta property="og:description" content="Plot in python"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/static-page.html"/>
+<meta property="og:url" content="/plot.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2020-08-24 10:01:00-04:00"/>
+<meta property="article:published_time" content="2020-09-22 10:01:00-04:00"/>
 <meta property="article:modified_time" content="2020-08-24 12:30:00-04:00"/>
 <meta property="article:author" content="/author/presnie-lu.html">
-<meta property="article:section" content="Pelican"/>
-<meta property="article:tag" content="Static"/>
-<meta property="article:tag" content="Pelican"/>
+<meta property="article:section" content="Plot"/>
+<meta property="article:tag" content="plot"/>
+<meta property="article:tag" content="python"/>
 <meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
@@ -67,9 +67,9 @@
 {
   "@context": "http://schema.org",
   "@type": "Article",
-  "name": "How to Create a Static Site on GitHub",
-  "headline": "How to Create a Static Site on GitHub",
-  "datePublished": "2020-08-24 10:01:00-04:00",
+  "name": "Project Malaria Plot",
+  "headline": "Project Malaria Plot",
+  "datePublished": "2020-09-22 10:01:00-04:00",
   "dateModified": "2020-08-24 12:30:00-04:00",
   "author": {
     "@type": "Person",
@@ -77,8 +77,8 @@
     "url": "/author/presnie-lu.html"
   },
   "image": "/theme/images/post-bg.jpg",
-  "url": "/static-page.html",
-  "description": "Static Site with Pelican"
+  "url": "/plot.html",
+  "description": "Plot in python"
 }
 </script>
 </head>
@@ -113,11 +113,11 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">How to Create a Static Site on GitHub</h1>
+        <h1 class="post-title">Project Malaria Plot</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="/author/presnie-lu.html">Presnie Lu</a>
-            | <time datetime="Mon 24 August 2020">Mon 24 August 2020</time>
+            | <time datetime="Tue 22 September 2020">Tue 22 September 2020</time>
         </span>
         <!-- TODO : Modified check -->
             <span class="post-meta"> | Updated on Mon 24 August 2020</span>
@@ -132,56 +132,26 @@
         <article class="post">
         <div class="inner">
             <section class="post-content">
-                <p><strong>This first blog will describe how to generate a static page using pelican and upload it to GitHub.</strong></p>
-<h2>Build a New Repository</h2>
-<p>The first step is to create a new repository on GitHub. I simply renamed the new repository using my own user name. I followed the instructions provided by <a href="https://pages.github.com/">GitHub</a> and initialize the repository with a README file and a MIT license. After that, I cloned this repository to the local machine and locate the system to work under this cloned folder. I also created a new branch called source to store and change my source code so that the master branch only works for serving files. </p>
-<h2>Create a Static Site with Pelican</h2>
-<p>The next step is to use the static site generater <a href="https://blog.getpelican.com/">Pelican</a> to create my own personal website. I listed several steps used to achieve such goal:  </p>
-<ol>
-<li>Install the pelican and ghp-import packages: the ghp-import package is used to publish the website to github.<br>
-<code>pip install pelican ghp-import</code>  </li>
-<li>
-<p>Run pelican-quickstart to create the site: Most questions can follow the default setting or our own preferences. Note: The following two questions are answered with Y to enable the automation process.  </p>
-<ul>
-<li>Do you want to generate a Fabfile/Makefile to automate generation and publishing? Y  </li>
-<li>Do you want to upload your website using GitHub Pages? Y  </li>
-</ul>
-</li>
-<li>
-<p>Create blogs/Articles under the content folder with text editor.(I used Markdown)  </p>
-</li>
-<li>
-<p>Generate the static files and Start the server using command: <br>
-<code>make html &amp;&amp; make serve</code>  </p>
-</li>
-<li>
-<p>Preview the website by typing localhost:8000 in web browser's address bar.  </p>
-</li>
-</ol>
-<h2>Update the Website to GitHub</h2>
-<p>The left step is to send the entire code to GitHub. We add, commit and push everying to the GitHub. We will also generate the final output of the pages under master branch on GitHub using the make function. </p>
-<p><code>make github</code>  </p>
-<h2>Optional: Change the Theme</h2>
-<p>There are many <a href="http://www.pelicanthemes.com/">themes</a> available for pelican users. Once we decided which one to use, we can then navigate to the <a href="https://github.com/getpelican/pelican-themes">Pelican Themes GitHub repository</a>. Following the instruction from the README file, I first clone the repository to local machine and then add the following line to pelicanconf file from my website's folder. I used the <a href="https://github.com/arulrajnet/attila/tree/02dcad911ba1eb2d797a79ec008a810d89a2fde1">attila</a> theme and many customized setting can be done similarly by modifying folders or the pelicanconf file.  </p>
-<p><code>THEME = Location of the Selected Theme Folder</code></p>
+                <p>The first figure:<br>
+<img alt="my_image" src="/img/plot1.png" title="Image Title on mouse-over"></p>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=How to Create a Static Site on GitHub&amp;url=/static-page.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Project Malaria Plot&amp;url=/plot.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/static-page.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/plot.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=/static-page.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/plot.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="/tag/static.html">Static</a><a href="/tag/pelican.html">Pelican</a>                </aside>
+<a href="/tag/plot.html">plot</a><a href="/tag/python.html">python</a>                </aside>
 
                 <div class="clear"></div>
 
