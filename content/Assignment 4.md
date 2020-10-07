@@ -213,3 +213,5 @@ Base on the description of the dataset, instrumentalness represents whether a tr
     join Playlist_Name
         on Playlist.Id = Playlist_Name.playlist_id
     where instrumentalness > 0.5
+
+The total number of the distinct playlist names satisfying this requirement is 256.
