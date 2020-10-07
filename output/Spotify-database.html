@@ -16,8 +16,6 @@
   <meta name="generator" content="Pelican" />
 <link href="/Spotify-database.html" rel="canonical" />
   <!-- Feed -->
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Full Atom Feed" />
-          <link href="/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Categories Atom Feed" />
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -137,7 +135,8 @@
                 <p><strong>This blog is used to store <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/readme.md">Spotify songs</a> dataset in at least 3rd normal form (3NF) with SQLite3 and SQL query to find the names of all playlists that contain instrumentals.</strong>  </p>
 <h1>Identify the relationship between variables</h1>
 <p>Before building the table, it is first necessary to identify what primary keys should we use and how many tables will be needed to reduce the data to a 3rd normal form. Based on <a href="https://en.wikipedia.org/wiki/Third_normal_formhttps://en.wikipedia.org/wiki/Third_normal_form">Wikipedia</a>, third normal form schema requires all the attributes from the data set are functionally dependent on solely the primary key. Therefore, according to this information, I listed out several potential primary keys to start with and I used Python to check whether these keys are valid. </p>
-<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spotify_songs.csv&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#read file</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spotify_songs.csv&quot;</span><span class="p">)</span>
 
 <span class="c1">#check whether same track_id has different value on other values</span>
 <span class="n">track_grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;track_id&quot;</span><span class="p">)</span>
@@ -176,20 +175,23 @@
 <h1>Building tables based on primary keys</h1>
 <h2>Track</h2>
 <p>By the first step, we proved some attributes depends only on track_id. Thus, we only include these attributes in the track table. </p>
-<div class="highlight"><pre><span></span><code><span class="n">Tracks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">tracknames</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#track table</span>
+<span class="n">Tracks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">tracknames</span><span class="p">]</span>
 <span class="c1">#album related information should be included in another table</span>
 <span class="n">Tracks</span> <span class="o">=</span> <span class="n">Tracks</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;track_album_name&quot;</span><span class="p">,</span> <span class="s2">&quot;track_album_release_date&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </code></pre></div>
 
 <h2>Album</h2>
 <p>The Album table includes related information from the album only.</p>
-<div class="highlight"><pre><span></span><code><span class="n">album</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">albumnames</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#album table</span>
+<span class="n">album</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">albumnames</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </code></pre></div>
 
 <h2>Playlist</h2>
 <p>The next step is to build separate tables and make sure these tables can be related using some foreign keys.<br>
 I firstly worked on the Playlist table. I first figured out that based on id we can know the name of the playlist. Therefore, I generated a table called playlist_name for matching id with names using playlist_id as the primary key. Similarly, because one subgenre only belongs to one genre, another table called playlist_genre was built by letting subgenre becomes the primary key. Notice that playlists with same ID can have different genres/subgenres and same genre/subgenre definitely can belong to different playlists. In order to solve this problem, I set the row number as the primary key which I called it playlist_Index. </p>
-<div class="highlight"><pre><span></span><code><span class="n">playlist_all</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;playlist&quot;</span><span class="p">)]</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#playlist table</span>
+<span class="n">playlist_all</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;playlist&quot;</span><span class="p">)]</span>
 <span class="n">playlist</span> <span class="o">=</span> <span class="n">playlist_all</span><span class="p">[[</span><span class="s1">&#39;playlist_id&#39;</span><span class="p">,</span> <span class="s1">&#39;playlist_subgenre&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">playlist</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">index</span> <span class="c1">#many to many relationship, needs an external index</span>
 <span class="n">playlist</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Playlist_Index&quot;</span><span class="p">,</span> <span class="s2">&quot;Id&quot;</span><span class="p">,</span> <span class="s2">&quot;Subgenre&quot;</span><span class="p">]</span>
@@ -199,7 +201,8 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 
 <h2>All_music Combined table</h2>
 <p>A similar question of many-to-many mapping also exists between individual songs and playlist. A song can belong to different playlists and a playlist will have many songs. Therefore, I solve this by using the row number as the primary key to relate the overall track table with the playlist table. In this table, track_id is included so that we can connect this table with track and Playlist_Genre_ID (which is the playlist_Index from the playlist table) so that we can refer to the information of playlist and its genre. These both attributes does not directly rely on each other. The intuition behind this table is that the primary key represents different combinations of an individual song in certain playlist with tags of some subgenre. </p>
-<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#combined</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
 <span class="n">alltbl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">playlist</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;playlist_id&quot;</span><span class="p">,</span><span class="s2">&quot;playlist_subgenre&quot;</span><span class="p">],</span>
      <span class="n">right_on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Id&quot;</span><span class="p">,</span> <span class="s2">&quot;Subgenre&quot;</span><span class="p">])</span>
 <span class="n">all_music</span> <span class="o">=</span> <span class="n">alltbl</span><span class="p">[[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;track_id&quot;</span><span class="p">,</span> <span class="s2">&quot;Playlist_Index&quot;</span><span class="p">]]</span> <span class="c1">#need id because track_id to playlist is many to many relationship</span>
@@ -208,12 +211,14 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 
 <h1>Store the data into SQLite3</h1>
 <p>We first create a new database to store the data using the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#load sql</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
 <span class="o">%</span><span class="n">sql</span> <span class="n">sqlite</span><span class="p">:</span><span class="o">///</span><span class="n">spotify</span><span class="o">.</span><span class="n">db</span>
 </code></pre></div>
 
 <p>Then, in this database, we need to build empty tables as a basic frame to store the data. We need these tables to be the same structure as what we discussed before in order to build right connections between them.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">sql</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#sql query</span>
+<span class="o">%%</span><span class="n">sql</span>
 <span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">All_Music</span><span class="p">;</span>
 <span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">Playlist</span><span class="p">;</span>
 <span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">Tracks</span><span class="p">;</span>
@@ -277,7 +282,8 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 </code></pre></div>
 
 <p>After this, we need to connect the panda dataframe with the database and insert the values into those tables. </p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#connect with pd dataframe, insert value</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
 <span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;spotify.db&quot;</span><span class="p">)</span>
 <span class="n">playlist</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">&quot;Playlist&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">album</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">&quot;Album&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
@@ -291,6 +297,18 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 <img alt="Relational Database" src="/img/relationalDB.png" title="Relational Database">  </p>
 <h1>Find the names of all playlists that contain instrumentals</h1>
 <p>Base on the description of the dataset, instrumentalness represents whether a track contains no vocals. I chose 0.5 as the thredshold because values above 0.5 are intended to represent instrumental tracks. With such information, I can then filter out playlists that contain tracks satisfying this criterion. The basic logic behind the following command is that base on track table, I can get tracks with instrumentalness; Using the all_music table, I can connect tracks with playlists (see what playlists contain those tracks); Finally, in the playlist table, we can see that is the id of those playlists contain instrumental tracks and we find the names of those playlists using playlist_name table. </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#sql query </span>
+<span class="o">%%</span><span class="n">sql</span>
+<span class="n">select</span> <span class="n">distinct</span> <span class="n">Playlist_Name</span><span class="o">.</span><span class="n">playlist_name</span>
+<span class="kn">from</span> <span class="nn">Tracks</span>
+<span class="n">join</span> <span class="n">All_music</span> 
+    <span class="n">on</span> <span class="n">Tracks</span><span class="o">.</span><span class="n">track_id</span> <span class="o">=</span> <span class="n">All_music</span><span class="o">.</span><span class="n">Track_ID</span>
+<span class="n">join</span> <span class="n">Playlist</span>
+    <span class="n">on</span> <span class="n">Playlist</span><span class="o">.</span><span class="n">Playlist_index</span> <span class="o">=</span> <span class="n">All_music</span><span class="o">.</span><span class="n">Playlist_Genre_ID</span>
+<span class="n">join</span> <span class="n">Playlist_Name</span>
+    <span class="n">on</span> <span class="n">Playlist</span><span class="o">.</span><span class="n">Id</span> <span class="o">=</span> <span class="n">Playlist_Name</span><span class="o">.</span><span class="n">playlist_id</span>
+<span class="n">where</span> <span class="n">instrumentalness</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+</code></pre></div>
             </section>
 
             <section class="post-info">

@@ -16,6 +16,7 @@ Summary: Use SQLite3 schema to store this data in at least 3rd normal form (3NF)
 Before building the table, it is first necessary to identify what primary keys should we use and how many tables will be needed to reduce the data to a 3rd normal form. Based on [Wikipedia](https://en.wikipedia.org/wiki/Third_normal_formhttps://en.wikipedia.org/wiki/Third_normal_form), third normal form schema requires all the attributes from the data set are functionally dependent on solely the primary key. Therefore, according to this information, I listed out several potential primary keys to start with and I used Python to check whether these keys are valid. 
     
     :::python
+    #read file
     df = pd.read_csv("spotify_songs.csv")
     
     #check whether same track_id has different value on other values
@@ -60,6 +61,7 @@ The basic idea behind this is we need to separate out the attributes from the ta
 By the first step, we proved some attributes depends only on track_id. Thus, we only include these attributes in the track table. 
 
     :::python 
+    #track table
     Tracks = df[tracknames]
     #album related information should be included in another table
     Tracks = Tracks.drop(["track_album_name", "track_album_release_date"], 1).drop_duplicates() 
@@ -69,6 +71,7 @@ By the first step, we proved some attributes depends only on track_id. Thus, we 
 The Album table includes related information from the album only.
 
     :::python
+    #album table
     album = df[albumnames].drop_duplicates()
     
     
@@ -79,6 +82,7 @@ The next step is to build separate tables and make sure these tables can be rela
 I firstly worked on the Playlist table. I first figured out that based on id we can know the name of the playlist. Therefore, I generated a table called playlist_name for matching id with names using playlist_id as the primary key. Similarly, because one subgenre only belongs to one genre, another table called playlist_genre was built by letting subgenre becomes the primary key. Notice that playlists with same ID can have different genres/subgenres and same genre/subgenre definitely can belong to different playlists. In order to solve this problem, I set the row number as the primary key which I called it playlist_Index. 
 
     :::python
+    #playlist table
     playlist_all = df.iloc[:,df.columns.str.contains("playlist")]
     playlist = playlist_all[['playlist_id', 'playlist_subgenre']].drop_duplicates().reset_index()
     playlist["index"] = playlist.index #many to many relationship, needs an external index
@@ -92,6 +96,7 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 A similar question of many-to-many mapping also exists between individual songs and playlist. A song can belong to different playlists and a playlist will have many songs. Therefore, I solve this by using the row number as the primary key to relate the overall track table with the playlist table. In this table, track_id is included so that we can connect this table with track and Playlist_Genre_ID (which is the playlist_Index from the playlist table) so that we can refer to the information of playlist and its genre. These both attributes does not directly rely on each other. The intuition behind this table is that the primary key represents different combinations of an individual song in certain playlist with tags of some subgenre. 
 
     :::python
+    #combined
     df["ID"] = df.index
     alltbl = pd.merge(df, playlist, how = "inner", left_on =["playlist_id","playlist_subgenre"],
          right_on = ["Id", "Subgenre"])
@@ -104,12 +109,14 @@ A similar question of many-to-many mapping also exists between individual songs 
 We first create a new database to store the data using the following command:
 
     :::python
+    #load sql
     %load_ext sql
     %sql sqlite:///spotify.db
 
 Then, in this database, we need to build empty tables as a basic frame to store the data. We need these tables to be the same structure as what we discussed before in order to build right connections between them.
 
     :::python
+    #sql query
     %%sql
     DROP TABLE IF EXISTS All_Music;
     DROP TABLE IF EXISTS Playlist;
@@ -177,6 +184,7 @@ Then, in this database, we need to build empty tables as a basic frame to store 
 After this, we need to connect the panda dataframe with the database and insert the values into those tables. 
     
     :::python
+    #connect with pd dataframe, insert value
     import sqlite3
     con = sqlite3.connect("spotify.db")
     playlist.to_sql("Playlist", con, if_exists='append',index = False)
@@ -193,3 +201,15 @@ With the above commands, the database eventually looks like this:
 
 Base on the description of the dataset, instrumentalness represents whether a track contains no vocals. I chose 0.5 as the thredshold because values above 0.5 are intended to represent instrumental tracks. With such information, I can then filter out playlists that contain tracks satisfying this criterion. The basic logic behind the following command is that base on track table, I can get tracks with instrumentalness; Using the all_music table, I can connect tracks with playlists (see what playlists contain those tracks); Finally, in the playlist table, we can see that is the id of those playlists contain instrumental tracks and we find the names of those playlists using playlist_name table. 
 
+    :::python
+    #sql query 
+    %%sql
+    select distinct Playlist_Name.playlist_name
+    from Tracks
+    join All_music 
+        on Tracks.track_id = All_music.Track_ID
+    join Playlist
+        on Playlist.Playlist_index = All_music.Playlist_Genre_ID
+    join Playlist_Name
+        on Playlist.Id = Playlist_Name.playlist_id
+    where instrumentalness > 0.5

@@ -23,6 +23,7 @@ To solve the problem, the following steps were considered:
 #### Code:  
 
     :::python
+    #problem 1
     def consecutive_num(raw, n):
         number=raw.replace("\n","")
         integer_set = [int(x) for x in number]
@@ -51,6 +52,7 @@ Notice that to check whether the pandigital number is a 1-9 number, I will sorte
 #### Code: 
 
     :::python
+    #problem 2
     def find_max_pandigital(min_int, max_int, max_n):
         pan = []
         for number in range(min_int, max_int):
@@ -74,6 +76,7 @@ A bouncy number is a positive integer that is neither increasing nor decreasing.
 #### Code: 
 
     :::python
+    #problem 3
     def bouncy_numbers(pct):
         bouncy = 0
         num = 0
