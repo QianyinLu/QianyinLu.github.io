@@ -16,8 +16,6 @@
   <meta name="generator" content="Pelican" />
 <link href="/plot.html" rel="canonical" />
   <!-- Feed -->
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Full Atom Feed" />
-          <link href="/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Categories Atom Feed" />
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -139,7 +137,7 @@
                 <p><strong>This Blog will include 3 informative visualizations about malaria using Python. I will use Malaria Dataset from <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13">github</a> to generate the plots.</strong></p>
 <h1>Figure 1</h1>
 <p>This first plot shows the total incidence number of malaria in year 2000, 2005, 2010 and 2015 for the Top five countries with the highest average malaria incidences. The stacked bar chart is used to differentiate the yearly composition as well as compare the total number of incidence for these countries. The dataset used in this plot is <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018/2018-11-13/malaria_inc.csv">malaria_inc.csv</a> and python code is provided below. Note this first plot is from the country level.  </p>
-<div class="highlight"><pre><span></span><span class="c1">#import data</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#import data</span>
 <span class="n">inc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;malaria_inc.csv&quot;</span><span class="p">)</span>
 <span class="n">inc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Entity&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Incidence of malaria (per 1,000 population at risk)&#39;</span><span class="p">]</span>
 
@@ -162,13 +160,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Incidence of malaria (per 1,000 population at risk)&quot;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span> <span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Incidence of Malaria for the 5 Highest Country (Average) group by Year&quot;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span> <span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="Incidence of Malaria" src="/img/plot1.png" title="Incidence of Malaria"></p>
 <h1>Figure 2</h1>
 <p>The second plot shows the Death Rate of Malaria for the 5 Highest Average Death Rate Regions. In this plot, I used boxplot to include death rates of malaria for these regions for all years so that we can not only compare the average death rate but also the max/min and different quantiles of death rate over years based on more than 20 years of data. The dataset used in this plot is <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018/2018-11-13/malaria_deaths.csv">malaria_deaths.csv</a> and python code is provided below. Note this first plot is from the regional(continent) level.  </p>
-<div class="highlight"><pre><span></span><span class="c1">#import data</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#import data</span>
 <span class="n">death</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;malaria_deaths.csv&quot;</span><span class="p">)</span>
 <span class="n">death</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">,</span> <span class="s2">&quot;Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Death Rate(per 100,000 people)&quot;</span><span class="p">]</span>
 
@@ -187,13 +184,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot of Death Rate Over Years for the 5 Highest Average Death Rate Regions&quot;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span> <span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span> <span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Death Rate(per 100,000 people)&quot;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span> <span class="p">:</span> <span class="mi">14</span><span class="p">})</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="Death Rate of Regions" src="/img/plot2.png" title="Boxplot of Death Rate for Regions"></p>
 <h1>Figure 3</h1>
 <p>The third plot shows the overall deaths caused by malaria worldwide and the age decomposition of the deaths over years. I used stacked area plot to illustrate the trend difference and overall composition of age group. It is obvious to see that the general trend of all age groups are quite similar over years and the under 5 years old group has always been the largest. The dataset used in this plot is <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018/2018-11-13/malaria_deaths_age.csv">malaria_deaths_age.csv</a> and python code is provided below. Note this first plot is from the world(aggregate all) level.  </p>
-<div class="highlight"><pre><span></span><span class="c1">#import data</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#import data</span>
 <span class="n">death_age</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;malaria_deaths_age.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="c1">#Filter out only world data</span>
@@ -217,8 +213,7 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Deaths&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;World Malaria Deaths over time group by Age&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="World Deaths Group By Age" src="/img/plot3.png" title="World Deaths Group By Age">  </p>
 <p>These above are the plots and code I generate for the Malaria dataset. Please feel free to contact me if you have any questions. </p>
