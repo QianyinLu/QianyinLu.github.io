@@ -175,4 +175,6 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 &lt;span class="n"&gt;join&lt;/span&gt; &lt;span class="n"&gt;Playlist_Name&lt;/span&gt;
     &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Playlist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Playlist_Name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;playlist_id&lt;/span&gt;
 &lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="n"&gt;instrumentalness&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Database"></category><category term="SQL"></category><category term="Relational database"></category></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The total number of the distinct playlist names satisfying this requirement is 256.&lt;/p&gt;</content><category term="Database"></category><category term="SQL"></category><category term="Relational database"></category></entry></feed>
