@@ -5,7 +5,7 @@ Modified: 2020-10-09 11:30
 Tags: SQL, Relational database
 Slug: Spotify-database
 Authors: Presnie Lu
-Summary: Use SQLite3 schema to store this data in at least 3rd normal form (3NF) and find names of all playlists that contain instrumentals.
+Summary: Use SQLite3 schema to store this data in at least 3rd normal form (3NF) and find names of all playlists that contain instrumentals
 
 **This blog is used to store [Spotify songs](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/readme.md) dataset in at least 3rd normal form (3NF) with SQLite3 and SQL query to find the names of all playlists that contain instrumentals.**  
 
