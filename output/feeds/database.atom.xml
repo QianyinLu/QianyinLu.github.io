@@ -177,4 +177,9 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 &lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="n"&gt;instrumentalness&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The total number of the distinct playlist names satisfying this requirement is 256.&lt;/p&gt;</content><category term="Database"></category><category term="SQL"></category><category term="Relational database"></category></entry></feed>
+&lt;p&gt;The total number of the distinct playlist names satisfying this requirement is 256 (Which I also checked using panda dataframe from python using the following command). &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#double check with python&lt;/span&gt;
+&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;instrumentalness&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;playlist_name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop_duplicates&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Please refer to the jupyter notebook for the complete list of playlist names. &lt;/p&gt;</content><category term="Database"></category><category term="SQL"></category><category term="Relational database"></category></entry></feed>
