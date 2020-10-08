@@ -214,4 +214,10 @@ Base on the description of the dataset, instrumentalness represents whether a tr
         on Playlist.Id = Playlist_Name.playlist_id
     where instrumentalness > 0.5
 
-The total number of the distinct playlist names satisfying this requirement is 256.
+The total number of the distinct playlist names satisfying this requirement is 256 (Which I also checked using panda dataframe from python using the following command). 
+
+    :::python
+    #double check with python
+    df[df["instrumentalness"] > 0.5]["playlist_name"].drop_duplicates()
+    
+Please refer to the jupyter notebook for the complete list of playlist names. 

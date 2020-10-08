@@ -16,8 +16,6 @@
   <meta name="generator" content="Pelican" />
 <link href="/Spotify-database.html" rel="canonical" />
   <!-- Feed -->
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Full Atom Feed" />
-          <link href="/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Presnie Lu Categories Atom Feed" />
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -312,7 +310,12 @@ I firstly worked on the Playlist table. I first figured out that based on id we 
 <span class="n">where</span> <span class="n">instrumentalness</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 </code></pre></div>
 
-<p>The total number of the distinct playlist names satisfying this requirement is 256.</p>
+<p>The total number of the distinct playlist names satisfying this requirement is 256 (Which I also checked using panda dataframe from python using the following command). </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#double check with python</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;instrumentalness&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">][</span><span class="s2">&quot;playlist_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Please refer to the jupyter notebook for the complete list of playlist names. </p>
             </section>
 
             <section class="post-info">
