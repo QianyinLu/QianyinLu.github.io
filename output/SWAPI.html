@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Use SWAPI to query Star Wars Universe characters</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="/SWAPI.html" rel="canonical" />
+  <!-- Feed -->
+
+  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="Download all people from Start Wars Universe using SWAPI and find the oldest character">
+
+    <meta name="author" content="Presnie Lu">
+
+    <meta name="tags" content="Database">
+    <meta name="tags" content="API">
+    <meta name="tags" content="requests">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Presnie Lu"/>
+<meta property="og:title" content="Use SWAPI to query Star Wars Universe characters"/>
+<meta property="og:description" content="Download all people from Start Wars Universe using SWAPI and find the oldest character"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/SWAPI.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-10-20 10:01:00-04:00"/>
+<meta property="article:modified_time" content="2020-10-20 11:30:00-04:00"/>
+<meta property="article:author" content="/author/presnie-lu.html">
+<meta property="article:section" content="Database"/>
+<meta property="article:tag" content="Database"/>
+<meta property="article:tag" content="API"/>
+<meta property="article:tag" content="requests"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Use SWAPI to query Star Wars Universe characters",
+  "headline": "Use SWAPI to query Star Wars Universe characters",
+  "datePublished": "2020-10-20 10:01:00-04:00",
+  "dateModified": "2020-10-20 11:30:00-04:00",
+  "author": {
+    "@type": "Person",
+    "name": "Presnie Lu",
+    "url": "/author/presnie-lu.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/SWAPI.html",
+  "description": "Download all people from Start Wars Universe using SWAPI and find the oldest character"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/Intro.html">Introduction of the Author</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Use SWAPI to query Star Wars Universe characters</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/presnie-lu.html">Presnie Lu</a>
+            | <time datetime="Tue 20 October 2020">Tue 20 October 2020</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on Tue 20 October 2020</span>
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p><strong>This blog is used to apply the requests library, download all the people in the Star Wars universe using the <a href="https://swapi.dev/documentation">Star Wars API</a>. We will also show the name of the oldest person (or robot or alien) and list the titles of all the films they appeared in.</strong></p>
+<h1>Explore SWAPI</h1>
+<p>One important tip before opening up python and using the requests library is to read through the documentation of APIs. In most cases, there are certain patterns of the urls which we pulled data from and it is very important to understand how these urls are structured. For SWAPI, we use this <a href="https://swapi.dev/documentation">documentation</a> to figure out how to pull data for all star war universe characters. We notice that the basic url( which is the root URL for all of the API) is <strong>https://swapi.dev/api/</strong> and we will append our customized url address base on this from now on. By reading through the document, we will see a section which tells you how to pull data for all people:<br>
+<img alt="People documentation" src="/img/people_doc.png" title="Documentation of Start War People">  <br>
+We see that we can use https://swapi.dev/api/people/ to get all the people resources. We can have a simple try by entering this url address from our browser. A screenshot of result looks like following:<br>
+<img alt="People list" src="/img/people_list.png" title="Screenshot of people list"> <br>
+From the response <strong>HTTP 200 OK</strong>, we see this is a successful request. We also notice there is a count listed above, which tells us there are 82 records available for these characters. However, when you scroll down, you will find out that the listed records from the results are definitely much fewer than this number. Therefore, we can instead use a for loop in python to go through all records of each of the character. To illustrate what individual record looks like from the url, we simply enter this address into the browser: https://swapi.dev/api/people/1/. A screenshot is presented below:<br>
+<img alt="People Instance" src="/img/people_instance.png" title="Screenshot of people instance"> <br>
+We see the structure of the record is very organized and we can easily turn this dictionary into a data frame in python. </p>
+<h1>Download Data Using API</h1>
+<p>The next step is to use requests library from python to pull these data. As I mentioned before, we need to list all combination of base url with 82 people to get a full list of star war universe characters. That is, we need to pull data from https://swapi.dev/api/people/1/, https://swapi.dev/api/people/2/, .... ,https://swapi.dev/api/people/82/. Therefore, a for loop is used and we append each record as a form of the list every time we finish a request.  </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#pull all data</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://swapi.dev/api/&quot;</span>
+<span class="n">people</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">83</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://swapi.dev/api/people/</span><span class="si">{}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">people</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Then, to make the data more presentable, we convert the list into a panda data frame. </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Convert list to dataframe</span>
+<span class="n">people_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now, we will have 82 records, each row will be the relevant information of each character. Each column will be the features of characters, including: name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, films, species, vehicles, starships, created, edited, url, detail. I won't go into details about what each of these features means. For now, we should care about <strong>name, birth_year and films</strong> the most. The following table shows the record of first five people from the database with features that we care about.<br>
+<img alt="Downloaded Data" src="/img/people_df.png" title="Downloaded Data">  </p>
+<h1>Find the Oldest Character</h1>
+<p>Now we got a dataframe with all people's information in it. In order to find out who is the oldest character, we can use sort to order these characters from the oldest to youngest. The feature that we should look at is <strong>birth_year</strong>. However, we notice that the birth_year is not documented as what we usually did. All birth years are combinations of certain number and string "BBY" or "ABY". Therefore, it is necessary for us to go back to the <a href="https://swapi.dev/documentation">documentation</a> and find out what this feature really means. Under <strong>People</strong> session, it lists a bunch of attributes as well as their meanings. These attributes are the same as features as I mentioned in last part:<br>
+<img alt="Attributes" src="/img/attributes.png" title="Attributes"><br>
+We see that the string in birth_year means Before the Battle of Yavin or After the Battle of Yavin. Because we need to find out the oldest character, I decide to first filter out people that were born before the Battle, which is equivalent to those people with "BBY" in birth_year. Notice that since there are some NAs in the birth_year, it is more wise to first replace it with "unknown". </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#filter out people born before the battle</span>
+<span class="n">people_df</span><span class="p">[</span><span class="s2">&quot;birth_year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">people_df</span><span class="p">[</span><span class="s2">&quot;birth_year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
+<span class="n">BBY</span> <span class="o">=</span> <span class="n">people_df</span><span class="p">[</span><span class="n">people_df</span><span class="p">[</span><span class="s2">&quot;birth_year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;BBY&quot;</span><span class="p">)]</span>
+</code></pre></div>
+
+<p>Then, after applying this filter, the data with people born before the battle looks like this (the first five people with selected feature): <br>
+<img alt="People Born Before Battle" src="/img/BBY.png" title="People Born Before Battle"><br>
+The next step would be finding out what is the oldest people among these. The basic idea is to find the largest number located before the string. For instance, 9BBY is smaller than 100BBY before the later one was born 100 years before the battle. Therefore, I used split to extract only the numeric part from birth_year. To be more specific, I first split on "B" so that the string will be divided into number, empty string and string Y (100BBY will be divided into 100, "", "Y"). We then apply pd.series to make each divided part into a column. Note that because the cell was original string, in order to sort in a numeric convention, we need to convert the string to float. Since we only need the numeric part, I added this "year" column into the original data and sort in descending order base this column. </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#sort by numeric term</span>
+<span class="n">year</span> <span class="o">=</span> <span class="n">BBY</span><span class="p">[</span><span class="s2">&quot;birth_year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">BBY</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>
+<span class="n">BBY_sorted</span> <span class="o">=</span> <span class="n">BBY</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The sorted table with five oldest characters look like this:<br>
+<img alt="People Sorted with Age" src="/img/BBY_sort.png" title="People Sorted with Age"><br>
+From this we can see the oldest character is Yoda.
+<img alt="Yoda" src="/img/yoda.png" title="Yoda">  </p>
+<h1>List the titles of all the films Yoda appeared in</h1>
+<p>The remaining step is quite easy. Now we know that Yoda is the oldest character in this database, we can look into the attribute <strong>films</strong>. We notice that this attribute contains a list of different urls link to the film database from SWAPI, we can then apply a similar step of using requests and for loop to extract the relevant information of the films.  </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#list out films </span>
+<span class="n">yoda</span> <span class="o">=</span> <span class="n">BBY_sorted</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="n">yoda</span><span class="p">[</span><span class="s2">&quot;films&quot;</span><span class="p">]</span>
+<span class="n">films</span> <span class="o">=</span> <span class="p">[</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+<span class="n">films_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">films</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Finally, the following table shows a list of film titles and episode_id that Yoda appears in:<br>
+<img alt="Film title and episode_id" src="/img/film2.png" title="film">  </p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Use SWAPI to query Star Wars Universe characters&amp;url=/SWAPI.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/SWAPI.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/SWAPI.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/database.html">Database</a><a href="/tag/api.html">API</a><a href="/tag/requests.html">requests</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/theme/js/script.js"></script>
+
+</body>
+</html>
