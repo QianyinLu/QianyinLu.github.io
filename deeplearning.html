@@ -211,7 +211,7 @@
 <h2>Model Building</h2>
 <p>For this problem, I set up four layers in total. The first step is to flatten the image data into a single array. The other three layers are dense layers. In terms of activation function, I tried sigmoid and relu as well as softmax using grid hyperparameter tuning. The following showed their actual functions: <br>
 <img alt="Sigmoid" src="/img/Sigmoid.png" title="Sigmoid Activation Function"> <br>
-<img alt="ReLU" src="/img/ReLU.png" title="ReLU Activation Function"><br>
+<img alt="ReLU" src="/img/ReLu.png" title="ReLU Activation Function"><br>
 In addition, I also added the choice of the optimizer as stochastic gradient descent (SGD) or Adam for the compiler. The actual code looks like this:  </p>
 <div class="highlight"><pre><span></span><code><span class="c1">#hyperparameter tuning </span>
 <span class="k">def</span> <span class="nf">cv_parameter_tuning</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">activation1</span><span class="p">,</span><span class="n">activation2</span><span class="p">,</span> <span class="n">optimization</span><span class="p">):</span>

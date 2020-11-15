@@ -74,7 +74,7 @@
 &lt;h2&gt;Model Building&lt;/h2&gt;
 &lt;p&gt;For this problem, I set up four layers in total. The first step is to flatten the image data into a single array. The other three layers are dense layers. In terms of activation function, I tried sigmoid and relu as well as softmax using grid hyperparameter tuning. The following showed their actual functions: &lt;br&gt;
 &lt;img alt="Sigmoid" src="/img/Sigmoid.png" title="Sigmoid Activation Function"&gt; &lt;br&gt;
-&lt;img alt="ReLU" src="/img/ReLU.png" title="ReLU Activation Function"&gt;&lt;br&gt;
+&lt;img alt="ReLU" src="/img/ReLu.png" title="ReLU Activation Function"&gt;&lt;br&gt;
 In addition, I also added the choice of the optimizer as stochastic gradient descent (SGD) or Adam for the compiler. The actual code looks like this:  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#hyperparameter tuning &lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cv_parameter_tuning&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;activation1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;activation2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;optimization&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
