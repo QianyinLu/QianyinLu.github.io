@@ -95,7 +95,7 @@ One additional step is required, which is scaling the images values between 0 an
 
 For this problem, I set up four layers in total. The first step is to flatten the image data into a single array. The other three layers are dense layers. In terms of activation function, I tried sigmoid and relu as well as softmax using grid hyperparameter tuning. The following showed their actual functions:   
 ![Sigmoid](/img/Sigmoid.png "Sigmoid Activation Function")   
-![ReLU](/img/ReLU.png "ReLU Activation Function")  
+![ReLU](/img/ReLu.png "ReLU Activation Function")  
 In addition, I also added the choice of the optimizer as stochastic gradient descent (SGD) or Adam for the compiler. The actual code looks like this:  
 
     :::python
